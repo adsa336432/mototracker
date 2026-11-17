@@ -3,180 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MotoTracker 重機保養里程追蹤器</title>
+    <title>機車耗材追蹤系統 (MotoTracker)</title>
     <style>
-        :root {
-            --bg-color: #121212;
-            --card-bg: #1e1e1e;
-            --text-main: #ffffff;
-            --text-muted: #aaaaaa;
-            --accent: #00e676; /* 科技綠 */
-            --warning: #ffb300;
-            --danger: #ff5252;
-            --border-radius: 12px;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            padding: 20px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-            color: var(--accent);
-            letter-spacing: 1px;
-        }
-
-        .card {
-            background-color: var(--card-bg);
-            border-radius: var(--border-radius);
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-        }
-
-        .input-group {
-            margin-bottom: 15px;
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        input {
-            width: 100%;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #333;
-            background-color: #2a2a2a;
-            color: var(--text-main);
-            font-size: 1rem;
-            outline: none;
-        }
-
-        input:focus {
-            border-color: var(--accent);
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            background-color: var(--accent);
-            color: #000;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: opacity 0.2s;
-        }
-
-        button:hover {
-            opacity: 0.8;
-        }
-
-        .item-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .item-card {
-            background-color: #2a2a2a;
-            border-radius: 8px;
-            padding: 15px;
-            position: relative;
-        }
-
-        .item-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .item-title {
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-
-        .item-stats {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .progress-bg {
-            background-color: #444;
-            height: 10px;
-            border-radius: 5px;
-            overflow: hidden;
-            margin-bottom: 5px;
-        }
-
-        .progress-fill {
-            height: 100%;
-            border-radius: 5px;
-            transition: width 0.3s ease, background-color 0.3s ease;
-        }
-
-        .status-text {
-            font-size: 0.8rem;
-            text-align: right;
-            font-weight: bold;
-        }
-
-        .delete-btn {
-            background: none;
-            color: var(--danger);
-            border: none;
-            width: auto;
-            padding: 5px;
-            font-size: 0.9rem;
-            cursor: pointer;
-        }
-
-        .delete-btn:hover {
-            text-decoration: underline;
-        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #121212; color: #fff; margin: 0; padding: 20px; }
+        .container { max-width: 600px; margin: 0 auto; background: #1e1e1e; padding: 25px; border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.5); }
+        h1, h2 { text-align: center; color: #4caf50; }
+        h2 { border-bottom: 1px solid #333; padding-bottom: 10px; margin-top: 30px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 8px; font-size: 14px; color: #aaa; }
+        input { width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #444; border-radius: 6px; background: #2c2c2c; color: #fff; font-size: 16px;}
+        input:focus { outline: none; border-color: #4caf50; }
+        button { width: 100%; padding: 12px; background: #4caf50; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; font-weight: bold; transition: background 0.2s;}
+        button:hover { background: #45a049; }
+        .item-card { background: #2a2a2a; padding: 18px; border-radius: 8px; margin-top: 15px; position: relative; border-left: 5px solid #444; }
+        .progress-bar-bg { background: #111; height: 12px; border-radius: 6px; margin-top: 15px; overflow: hidden; box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);}
+        .progress-bar-fill { height: 100%; transition: width 0.4s ease-out, background-color 0.4s; }
+        .delete-btn { position: absolute; right: 15px; top: 18px; background: #f44336; padding: 6px 12px; font-size: 13px; width: auto; border-radius: 4px;}
+        .delete-btn:hover { background: #d32f2f; }
+        .data-row { display: flex; justify-content: space-between; font-size: 14px; color: #ccc; margin-bottom: 5px; }
     </style>
 </head>
 <body>
-
-    <h1>🏍️ MotoTracker 保養追蹤</h1>
-
-    <!-- 總里程設定區 -->
-    <div class="card">
-        <div class="input-group">
-            <label for="current-mileage">當前車輛總里程 (km)</label>
-            <input type="number" id="current-mileage" placeholder="例如：24500" onchange="updateMileage()">
+    <div class="container">
+        <h1>🏍️ MotoTracker 耗材追蹤</h1>
+        
+        <!-- 總里程設定區 -->
+        <div class="form-group">
+            <label>目前車輛總里程數 (km)</label>
+            <input type="number" id="current-mileage" placeholder="請輸入儀表板上的總里程">
+            <button onclick="saveCurrentMileage()" style="margin-top: 10px;">更新總里程</button>
         </div>
-    </div>
 
-    <!-- 新增耗材區 -->
-    <div class="card">
-        <h2 style="font-size: 1.1rem; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px;">新增保養項目</h2>
-        <div class="input-group">
-            <label for="item-name">耗材名稱 (如：機油、皮帶、火星塞)</label>
+        <!-- 新增耗材區 -->
+        <h2>新增耗材項目</h2>
+        <div class="form-group">
+            <label>耗材名稱 (例：機油、煞車皮、輪胎)</label>
             <input type="text" id="item-name" placeholder="輸入耗材名稱">
         </div>
-        <div style="display: flex; gap: 10px;">
-            <div class="input-group" style="flex: 1;">
-                <label for="last-mileage">上次更換里程</
+        <div class="form-group">
+            <label>上次更換里程 (km)</label>
+            <input type="number" id="last-mileage" placeholder="例：15000">
+        </div>
+        <div class="form-group">
+            <label>建議使用壽命 (km)</label>
+            <input type="number" id="lifespan" placeholder="例：2000 (機油) 或 10000 (輪胎)">
+        </div>
+        <button onclick="addItem()">新增耗材紀錄</button>
+
+        <!-- 耗材狀態清單區 -->
+        <h2>各項耗材狀態</h2>
+        <div id="item-list"></div>
+    </div>
+
+    <script>
+        // 讀取 LocalStorage 資料，若無則初始化為空陣列或0
+        let items = JSON.parse(localStorage.getItem('motoItems')) || [];
+        let currentMileage = localStorage.getItem('motoCurrentMileage') || 0;
+
+        document.getElementById('current-mileage').value = currentMileage;
+
+        function saveCurrentMileage() {
+            const inputVal = document.getElementById('current-mileage').value;
+            if (inputVal === '') {
+                alert('請輸入總里程數');
+                return;
+            }
+            currentMileage = parseInt(inputVal);
+            localStorage.setItem('motoCurrentMileage', currentMileage);
+            renderItems();
+        }
+
+        function addItem() {
+            const name = document.getElementById('item-name').value;
+            const lastMileage = parseInt(document.getElementById('last-mileage').value);
+            const lifespan = parseInt(document.getElementById('lifespan').value);
+
+            if (!name || isNaN(lastMileage) || isNaN(lifespan)) {
+                alert('錯誤：請完整填寫耗材名稱、上次更換里程與建議壽命。');
+                return;
+            }
+            if (lastMileage > currentMileage) {
+                alert('警告：上次更換里程不應大於目前總里程。');
+            }
+
+            items.push({ id: Date.now(), name, lastMileage, lifespan });
+            localStorage.setItem('motoItems', JSON.stringify(items));
+            
+            // 清空輸入框
+            document.getElementById('item-name').value = '';
+            document.getElementById('last-mileage').value = '';
+            document.getElementById('lifespan').value = '';
+            
+            renderItems();
+        }
+
+        function deleteItem(id) {
+            items = items.filter(item => item.id !== id);
+            localStorage.setItem('motoItems', JSON.stringify(items));
+            renderItems();
+        }
+
+        function renderItems() {
+            const list = document.getElementById('item-list');
+            list.innerHTML = '';
+            currentMileage = parseInt(document.getElementById('current-mileage').value) || 0;
+
+            if (items.length === 0) {
+                list.innerHTML = '<p style="text-align:center; color:#777;">目前尚無耗材紀錄，請從上方新增。</p>';
+                return;
+            }
+
+            items.forEach(item => {
+                const usedMileage = currentMileage - item.lastMileage;
+                let percentage = (usedMileage / item.lifespan) * 100;
+                if (percentage < 0) percentage = 0;
+                
+                let displayPercent = percentage > 100 ? 100 : percentage;
+                let color = '#4caf50'; // 預設綠色
+                let statusText = '狀況良好';
+                let borderColor = '#4caf50';
+
+                // 顏色與狀態邏輯判斷
+                if (percentage >= 70 && percentage < 90) {
+                    color = '#ff9800'; // 黃/橘色
+                    statusText = '注意更換';
+                    borderColor = '#ff9800';
+                } else if (percentage >= 90) {
+                    color = '#f44336'; // 紅色
+                    statusText = percentage >= 100 ? '必須立即更換' : '壽命即將耗盡';
+                    borderColor = '#f44336';
+                }
+
+                const remaining = item.lifespan - usedMileage;
+
+                list.innerHTML += `
+                    <div class="item-card" style="border-left-color: ${borderColor}">
+                        <button class="delete-btn" onclick="deleteItem(${item.id})">刪除</button>
+                        <h3 style="margin-top: 0; color: ${color};">${item.name} <span style="font-size: 14px;">(${statusText})</span></h3>
+                        <div class="data-row">
+                            <span>上次更換: ${item.lastMileage} km</span>
+                            <span>建議壽命: ${item.lifespan} km</span>
+                        </div>
+                        <div class="data-row">
+                            <span>已使用: ${usedMileage > 0 ? usedMileage : 0} km</span>
+                            <span style="color: ${remaining <= 0 ? '#f44336' : '#ccc'}">剩餘里程: ${remaining > 0 ? remaining : 0} km</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" style="width: ${displayPercent}%; background-color: ${color};"></div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // 初始化渲染
+        renderItems();
+    </script>
+</body>
+</html>
